@@ -6,15 +6,16 @@ import AsideListboxCategory from './aside_Listbox_Category';
 
 class Aside extends Component {	
   handleChange = (val) => {
-  	console.log(val);
+  	this.props.parHandleChange(val);
   }
   render() {
+  	 var {arrayItemsCategory} = this.props;
     return (
 		<aside className="col-lg-2 col-md-2">
 			<div className="list-category">
 				<AsideInfoUser />
 				<AsideFilter handleChange={this.handleChange} />		
-				<AsideListboxCategory />														
+				<AsideListboxCategory arrayItemsCategory={arrayItemsCategory} />														
 			</div>
 			<div className="close-aside"></div>			
 		</aside>	
