@@ -1,0 +1,10 @@
+$color-background : #283339;
+$color-text : #fff;
+$padding-content: 10px 20px;
+$color-h2: #c1c1c1;
+$pading-content-section: 1%;
+
+@import "common.scss";
+@import "header.scss";
+@import "aside.scss";
+@import "content.scss";

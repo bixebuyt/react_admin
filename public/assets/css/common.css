@@ -1,0 +1,29 @@
+body {
+  background-size: cover;
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  color: #212529; }
+  body .wp-content {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%; }
+    body .wp-content h1, body .wp-content h2, body .wp-content h3, body .wp-content h4, body .wp-content h5, body .wp-content p {
+      padding: 0px;
+      margin: 0px;
+      font-weight: 500;
+      line-height: inherit; }
+  body .flt-left {
+    float: left; }
+  body sup {
+    top: 0px;
+    font-size: 13px;
+    color: #f0ad4e; }
+
+/*# sourceMappingURL=common.css.map */
