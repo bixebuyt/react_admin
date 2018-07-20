@@ -48,7 +48,7 @@ function checkboxAll() {
 }
 $(document).ready(function() {
 	closeAside();
-	toggleAside();
+	// toggleAside();
 	showNotice();
 	checkboxAll();
 })

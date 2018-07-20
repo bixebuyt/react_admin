@@ -8,6 +8,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			valueFilter: '',
+			toggleMenu: false,
 			arrayItemsCategory: [
 				{
 					name: 'Ariticle',
@@ -32,10 +33,9 @@ class App extends Component {
 		this.setState({
 			valueFilter: val
 		})
-	}	
+	}
 	render() {
 		var { arrayItemsCategory, valueFilter } = this.state;
-		console.log(arrayItemsCategory);
 		if (valueFilter) {
 			   arrayItemsCategory = arrayItemsCategory.filter((Item) => {
 				return Item.name.toLowerCase().indexOf(this.state.valueFilter) !== -1;
