@@ -6,6 +6,7 @@ import ContentPagination from './content_Pagination';
 
 class Content extends Component {
   render() {
+    var { arrayTasks } = this.props;
     return (
       <div id="content" className="col-lg-10 col-md-10">	
          <ContentBreadcrumb />	
@@ -27,7 +28,7 @@ class Content extends Component {
                   </tr>
                </thead>
                <tbody>
-                  <ContentItem />
+                  <ContentItem arrayTasks={ arrayTasks } />
                </tbody>
               </table>
             </div>

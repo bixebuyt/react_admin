@@ -8,7 +8,7 @@ class App extends Component {
 		super(props);
 		this.state = {
 			valueFilter: '',
-			toggleMenu: false,
+			toggleMenu: true,
 			arrayItemsCategory: [
 				{
 					name: 'Ariticle',
@@ -26,6 +26,22 @@ class App extends Component {
 					name: 'Other',
 					icon: 'fa fa-braille'
 				}							
+			],
+			arrayTasks: [
+				{
+					fName: 'Lionel',
+					lName: 'Messi',
+					address: 'Barcelona, Spain',
+					email: 'dienthangnam@gmail.com',
+					stt: true
+				},
+				// {
+				// 	fName: 'Cris',
+				// 	lName: 'Ronaldo',
+				// 	address: 'Madrid, Spain',
+				// 	email: 'dienthangtrung@gmail.com',
+				// 	stt: false
+				// }				
 			]
 		}
 	}	
@@ -34,8 +50,13 @@ class App extends Component {
 			valueFilter: val
 		})
 	}
+	handleToggle = () => {
+		this.setState({
+			toggleMenu: !this.state.toggleMenu
+		})
+	}
 	render() {
-		var { arrayItemsCategory, valueFilter } = this.state;
+		var { arrayItemsCategory, valueFilter, toggleMenu, arrayTasks } = this.state;
 		if (valueFilter) {
 			   arrayItemsCategory = arrayItemsCategory.filter((Item) => {
 				return Item.name.toLowerCase().indexOf(this.state.valueFilter) !== -1;
@@ -44,8 +65,12 @@ class App extends Component {
 		return (
 		  <div className="App">
 		      <Header />
-		      <Aside parHandleChange={this.parHandleChange} arrayItemsCategory={arrayItemsCategory} />
-		      <Content />
+		      <Aside 
+		      	valueToggleMenu={toggleMenu}
+		      	handleToggle={this.handleToggle}
+		      	parHandleChange={this.parHandleChange} 
+		      	arrayItemsCategory={arrayItemsCategory} />
+		      <Content arrayTasks={arrayTasks} />
 		  </div>
 		);
 	}
