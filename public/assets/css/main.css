@@ -317,8 +317,10 @@ aside {
       font-size: 16px; }
       #content section.table-content .table-responsive table {
         font-size: 16px; }
-        #content section.table-content .table-responsive table tr td.icon-active img {
-          width: 23px; }
+        #content section.table-content .table-responsive table tr td i.active {
+          color: #19b519; }
+        #content section.table-content .table-responsive table tr td i.unactive {
+          color: #ff3535; }
     #content section.table-content .pagination {
       display: flex; }
 

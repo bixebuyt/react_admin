@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AsideListboxCategory extends Component {
+class AsideItemCategory extends Component {
 	render() {
 		var Items = this.props.arrayItemsCategory;
 		var Item = Items.map((e, i) => 
@@ -16,4 +16,4 @@ class AsideListboxCategory extends Component {
 	}
 }
 
-export default AsideListboxCategory
+export default AsideItemCategory

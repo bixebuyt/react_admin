@@ -6,7 +6,10 @@ import ContentPagination from './content_Pagination';
 
 class Content extends Component {
   render() {
-    var { arrayTasks } = this.props;
+    var { arrayTasks, handleStt } = this.props;
+    var listTasks = arrayTasks.map((task, index) => 
+         <ContentItem handleStt={handleStt} key={index} index={index} task={ task } />
+    )
     return (
       <div id="content" className="col-lg-10 col-md-10">	
          <ContentBreadcrumb />	
@@ -18,6 +21,7 @@ class Content extends Component {
                <thead>
                   <tr>
                     <th><input type="checkbox" id="checkall" /></th>
+                    <th>No.</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Address</th>
@@ -26,9 +30,9 @@ class Content extends Component {
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
-               </thead>
-               <tbody>
-                  <ContentItem arrayTasks={ arrayTasks } />
+               </thead>    
+               <tbody>         
+                { listTasks }
                </tbody>
               </table>
             </div>

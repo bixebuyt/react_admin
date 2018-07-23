@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from './components/header/Header';
 import Aside from './components/aside/Aside';
 import Content from './components/content/Content';
+import _ from 'lodash';
+const uuidv1 = require('uuid/v1');
 
 class App extends Component {
 	constructor(props) {
@@ -29,19 +31,29 @@ class App extends Component {
 			],
 			arrayTasks: [
 				{
+					id: uuidv1(),
 					fName: 'Lionel',
 					lName: 'Messi',
 					address: 'Barcelona, Spain',
 					email: 'dienthangnam@gmail.com',
 					stt: true
 				},
-				// {
-				// 	fName: 'Cris',
-				// 	lName: 'Ronaldo',
-				// 	address: 'Madrid, Spain',
-				// 	email: 'dienthangtrung@gmail.com',
-				// 	stt: false
-				// }				
+				{
+					id: uuidv1(),
+					fName: 'Cris',
+					lName: 'Ronaldo',
+					address: 'Madrid, Spain',
+					email: 'dienthangtrung@gmail.com',
+					stt: false
+				},
+				{
+					id: uuidv1(),
+					fName: 'Ngô Văn',
+					lName: 'Minh Nhật',
+					address: 'Quảng Nam, Việt Nam',
+					email: 'dienthangbac@gmail.com',
+					stt: false
+				}				
 			]
 		}
 	}	
@@ -55,13 +67,30 @@ class App extends Component {
 			toggleMenu: !this.state.toggleMenu
 		})
 	}
-	render() {
+	componentWillMount() {
+		// localStorage.setItem(key, value);
+	}
+	handleStt = (e) => {
+		var tasks  = this.state.arrayTasks;
+		var i = _.findIndex(tasks, function(el) {
+			return el.id === e
+		})
+		if ( i > -1 ) {
+			tasks[i].stt = !tasks[i].stt
+		}
+		this.setState({
+			arrayTasks: tasks
+		})	
+		localStorage.setItem('arrayTasks', JSON.stringify(this.state.arrayTasks));
+	}
+	render() {		
 		var { arrayItemsCategory, valueFilter, toggleMenu, arrayTasks } = this.state;
 		if (valueFilter) {
 			   arrayItemsCategory = arrayItemsCategory.filter((Item) => {
 				return Item.name.toLowerCase().indexOf(this.state.valueFilter) !== -1;
 			})
 		}
+		// console.log(this.state.arrayTasks[0].fName);
 		return (
 		  <div className="App">
 		      <Header />
@@ -70,7 +99,9 @@ class App extends Component {
 		      	handleToggle={this.handleToggle}
 		      	parHandleChange={this.parHandleChange} 
 		      	arrayItemsCategory={arrayItemsCategory} />
-		      <Content arrayTasks={arrayTasks} />
+		      <Content 
+		      	arrayTasks={arrayTasks}
+		      	handleStt={this.handleStt} />
 		  </div>
 		);
 	}

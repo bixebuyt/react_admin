@@ -24,8 +24,8 @@ class AsideListboxCategory extends Component {
   	}
     return (
     	<div className="box-category __border-top-none">
-			{titleCategory}
-			{asideItemCategory}			
+        {titleCategory}
+        {asideItemCategory}			
     	</div>
     );
   }
