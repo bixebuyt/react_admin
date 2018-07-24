@@ -11,14 +11,16 @@ class App extends Component {
 		this.state = {
 			valueFilter: '',
 			valueFilterProd: '',
+			valueSortProd: 'values',
 			toggleMenu: true,
+			/* INFO USER ADMIN */
 			infoUser: [
 				{
 					img: 'uploads/user/avatar.png',
 					name: 'Ngo Van Minh Nhat',
 					position: 'Admin'
 				}
-			], /* INFO USER ADMIN */
+			],
 			arrayItemsCategory: [
 				{
 					name: 'Products',
@@ -60,7 +62,7 @@ class App extends Component {
 					title: 'Huawei P8',
 					comment: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form',
 					content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable.',
-					stt: false
+					stt: true
 				},
 				{
 					id: uuidv1(),
@@ -93,6 +95,15 @@ class App extends Component {
 			valueFilterProd: val
 		})
 	}
+	// SORT PRODUCT //
+	handleSortProd = (val) => {
+		console.log(val);
+		var valueSort = (val === 1) ? true : false;
+		console.log(valueSort);
+		this.setState({
+			valueSortProd: valueSort
+		})
+	}
 	// HANDLE TOGGLE CATEGORY MENU //
 	handleToggle = () => {
 		this.setState({
@@ -104,32 +115,39 @@ class App extends Component {
 	}
 	// HANDLE TOGGLE STATUS //
 	handleStt = (e) => {
-		var tasks  = this.state.arrayProducts;
-		var i = _.findIndex(tasks, function(el) {
+		var products  = this.state.arrayProducts;
+		var i = _.findIndex(products, function(el) {    // RETRUN KEY TASKS //
 			return el.id === e
 		})
 		if ( i > -1 ) {
-			tasks[i].stt = !tasks[i].stt
+			products[i].stt = !products[i].stt
 		}
 		this.setState({
-			arrayProducts: tasks
+			arrayProducts: products
 		})	
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
 	}
 	render() {		
-		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd } = this.state;
+		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd } = this.state;
+		console.log(valueSortProd);
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {
 				arrayItemsCategory = arrayItemsCategory.filter((Item) => {
-				return Item.name.toLowerCase().indexOf(this.state.valueFilter) !== -1;
+				return Item.name.toLowerCase().indexOf(valueFilter.toLowerCase()) !== -1;
 			})
 		}
 		// FILTER PRODUCT //
 		if (valueFilterProd) {
 				arrayProducts = arrayProducts.filter((Item) => {
-				return Item.title.toLowerCase().indexOf(valueFilterProd) !== -1;
+				return Item.title.toLowerCase().indexOf(valueFilterProd.toLowerCase()) !== -1;
 			})
-		}		
+		}
+		// SORT PRODUCT //
+		if (valueSortProd !== 'values') {
+				arrayProducts = arrayProducts.filter((Item) => {
+				return Item.stt === valueSortProd
+			})
+		}					
 		// console.log(this.state.arrayProducts[0].fName);
 		return (
 		  <div className="App">
@@ -142,6 +160,7 @@ class App extends Component {
 		      	arrayItemsCategory={arrayItemsCategory} />
 		      <Content 
 		      	handleFilterProd = {this.handleFilterProd}
+		      	handleSortProd = {this.handleSortProd}
 		      	arrayProducts={arrayProducts}
 		      	handleStt={this.handleStt} />
 		  </div>

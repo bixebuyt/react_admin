@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ContentBreadcrumb from './content_Breadcrumb';
-import ContentSortFilter from './content_Sort_Filter';
+import ContentFilter from './content_Filter';
+import ContentSort from './content_Sort';
 import ContentItem from './content_Item';
 import ContentPagination from './content_Pagination';
 
 class Content extends Component {
   render() {
-    var { arrayProducts, handleStt, handleFilterProd } = this.props;
+    var { arrayProducts, handleStt, handleFilterProd, handleSortProd } = this.props;
     var showArrayProducts = arrayProducts.map((product, index) => 
          <ContentItem 
             handleStt={handleStt} 
@@ -19,7 +20,10 @@ class Content extends Component {
          <ContentBreadcrumb />	
          <section className="table-content">
           <div className="col-md-12">
-            <ContentSortFilter handleFilterProd = {handleFilterProd} /> 
+            <div className="filter-item">
+              <ContentFilter handleFilterProd = {handleFilterProd} /> 
+              <ContentSort handleSortProd = {handleSortProd} />
+            </div>
             <div className="table-responsive">
               <table id="mytable" className="table table-bordred table-striped">
                <thead>
