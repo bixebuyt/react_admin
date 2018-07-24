@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 
 class AsideInfoUser extends Component {
   render() {
-    return (
-		<div className="info-user clearfix">
-			<div className="avatar flt-left"><img src="assets/images/avatar.png" alt="avatar User" /></div>
-			<div className="profile">
-				<strong>Ngo Van Minh Nhat</strong>
-				<p>Admin</p>
+  	 var {infoUser}= this.props;
+  	 var showInfoUser = infoUser.map((value, index) => 
+			<div key={index}>
+				<div className="avatar flt-left"><img src={window.location.origin+ '/'+value.img} alt={value.name} /></div>
+				<div className="profile">
+					<strong>{value.name}</strong>
+					<p>{value.position}</p>
+				</div>
 			</div>
-		</div>
+  	 )
+    return (
+    <div className="info-user clearfix">
+    	{showInfoUser}
+    </div>
     );
   }
 }

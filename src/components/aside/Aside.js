@@ -9,11 +9,11 @@ class Aside extends Component {
   	this.props.parHandleChange(val);
   }
   render() {
-  	var {arrayItemsCategory, handleToggle, valueToggleMenu} = this.props;
+  	var {arrayItemsCategory, handleToggle, valueToggleMenu, infoUser} = this.props;
     return (
 		<aside className="col-lg-2 col-md-2">
 			<div className="list-category">
-				<AsideInfoUser />
+				<AsideInfoUser infoUser={infoUser} />
 				<AsideFilter handleChange={this.handleChange} />		
 				<AsideListboxCategory 
 					toggleMenu={valueToggleMenu}
