@@ -12,6 +12,7 @@ class App extends Component {
 			valueFilter: '',
 			valueFilterProd: '',
 			valueSortProd: 'values',
+			valueSortSlug: '',
 			toggleMenu: true,
 			/* INFO USER ADMIN */
 			infoUser: [
@@ -96,12 +97,15 @@ class App extends Component {
 		})
 	}
 	// SORT PRODUCT //
-	handleSortProd = (val) => {
-		console.log(val);
-		var valueSort = (val === 1) ? true : false;
-		console.log(valueSort);
+	handleSortProd = (slug, val) => {
+		if ( slug === 'user' ) {
+			var valueSort = (val === 1) ? true : false;
+		}else if ( slug === 'string' ) {
+			var valueSort = val;
+		}
 		this.setState({
-			valueSortProd: valueSort
+			valueSortProd: valueSort,
+			valueSortSlug: slug
 		})
 	}
 	// HANDLE TOGGLE CATEGORY MENU //
@@ -128,8 +132,7 @@ class App extends Component {
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
 	}
 	render() {		
-		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd } = this.state;
-		console.log(valueSortProd);
+		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {
 				arrayItemsCategory = arrayItemsCategory.filter((Item) => {
@@ -143,27 +146,30 @@ class App extends Component {
 			})
 		}
 		// SORT PRODUCT //
-		if (valueSortProd !== 'values') {
+		if (valueSortProd !== 'values' || valueSortSlug === 'user' ) {
 				arrayProducts = arrayProducts.filter((Item) => {
 				return Item.stt === valueSortProd
 			})
-		}					
+		}else if ( valueSortProd !== 'values' || valueSortSlug === 'stt' ) {
+			arrayProducts = _.orderBy(arrayProducts, ['title'], [valueSortProd]);
+		}			
+		console.log(valueSortSlug + '  ' + valueSortProd );
 		// console.log(this.state.arrayProducts[0].fName);
 		return (
-		  <div className="App">
-		      <Header />
-		      <Aside 
-		      	infoUser={infoUser}
-		      	valueToggleMenu={toggleMenu}
-		      	handleToggle={this.handleToggle}
-		      	parHandleChange={this.parHandleChange} 
-		      	arrayItemsCategory={arrayItemsCategory} />
-		      <Content 
-		      	handleFilterProd = {this.handleFilterProd}
-		      	handleSortProd = {this.handleSortProd}
-		      	arrayProducts={arrayProducts}
-		      	handleStt={this.handleStt} />
-		  </div>
+			<div className="App">
+			   <Header />
+			   <Aside 
+			   	infoUser={infoUser}
+			   	valueToggleMenu={toggleMenu}
+			   	handleToggle={this.handleToggle}
+			   	parHandleChange={this.parHandleChange} 
+			   	arrayItemsCategory={arrayItemsCategory} />
+			   <Content 
+			   	handleFilterProd = {this.handleFilterProd}
+			   	handleSortProd = {this.handleSortProd}
+			   	arrayProducts={arrayProducts}
+			   	handleStt={this.handleStt} />
+			</div>
 		);
 	}
 }

@@ -7,8 +7,8 @@ class ContentSort extends Component {
 
       }
    }
-   handleOnClick = (value) => {
-      this.props.handleSortProd(value);
+   handleOnClick = (slug,value) => {
+      this.props.handleSortProd(slug, value);
    }
    render() {
       return (
@@ -16,10 +16,10 @@ class ContentSort extends Component {
             <button className="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort By &nbsp;
                <span className="caret" /></button>
             <ul className="dropdown-menu">
-               <li><a role="button" onClick={() => this.handleOnClick('desc')}>A - Z</a></li>
-               <li><a role="button" onClick={() => this.handleOnClick('asc')}>Z - A</a></li>
-               <li><a role="button" onClick={() => this.handleOnClick(1)}>Active</a></li>
-               <li><a role="button" onClick={() => this.handleOnClick(0)}>Unactive</a></li>
+               <li><a role="button" onClick={() => this.handleOnClick('user', 'desc')}>A - Z</a></li>
+               <li><a role="button" onClick={() => this.handleOnClick('user', 'asc')}>Z - A</a></li>
+               <li><a role="button" onClick={() => this.handleOnClick('stt', 1)}>Active</a></li>
+               <li><a role="button" onClick={() => this.handleOnClick('stt', 0)}>Unactive</a></li>
             </ul>
          </div>										
       );
