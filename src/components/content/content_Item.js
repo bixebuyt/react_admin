@@ -4,6 +4,9 @@ class ContentItem extends Component {
   handleStt = (e) => {
     this.props.handleStt(this.props.product.id)
   }
+  handleDelete = (e) => {
+    this.props.handleDelete(e)
+  }
   render() {
     var { product, index } = this.props;    
     return (      
@@ -19,7 +22,7 @@ class ContentItem extends Component {
             <p data-placement="top" data-toggle="tooltip" title="Edit"><button className="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span className="glyphicon glyphicon-pencil" /></button></p>
           </td>
           <td>
-            <p data-placement="top" data-toggle="tooltip" title="Delete"><button className="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span className="glyphicon glyphicon-trash" /></button></p>
+            <p data-placement="top" data-toggle="tooltip" title="Delete"><button onClick={() => this.handleDelete(product.id)} className="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"><span className="glyphicon glyphicon-trash" /></button></p>
           </td>
         </tr>  
     );

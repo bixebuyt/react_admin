@@ -84,6 +84,13 @@ class App extends Component {
 			]
 		}
 	}	
+	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
+	componentWillMount() { 		
+	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
+	   this.setState({
+	     arrayProducts: arrayProducts
+	   })   
+	}	
 	// FILTER CATEGORY MENU //
 	parHandleChange = (val) => { 
 		this.setState({
@@ -98,9 +105,9 @@ class App extends Component {
 	}
 	// SORT PRODUCT //
 	handleSortProd = (slug, val) => {
-		if ( slug === 'user' ) {
+		if ( slug === 'stt' ) {
 			var valueSort = (val === 1) ? true : false;
-		}else if ( slug === 'string' ) {
+		}else if ( slug === 'user' ) {
 			var valueSort = val;
 		}
 		this.setState({
@@ -114,9 +121,6 @@ class App extends Component {
 			toggleMenu: !this.state.toggleMenu
 		})
 	}
-	componentWillMount() {
-		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
-	}
 	// HANDLE TOGGLE STATUS //
 	handleStt = (e) => {
 		var products  = this.state.arrayProducts;
@@ -129,7 +133,25 @@ class App extends Component {
 		this.setState({
 			arrayProducts: products
 		})	
-		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
+		localStorage.setItem('arrayProducts', JSON.stringify(products))
+	}
+	// HANDLE DELETE ITEM PRODUCT //
+	handleDelete = (itemId) => {
+		var { arrayProducts } = this.state;
+		var arrayProducts = _.filter(arrayProducts, function(item) {
+			return item.id !== itemId ; 
+		});
+		this.setState({
+			arrayProducts: arrayProducts
+		})
+		localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
+	}
+	handleAdd = (data) => {
+		var { arrayProducts } = this.state;
+		arrayProducts.push(data);
+		this.setState({
+			arrayProducts: arrayProducts
+		})
 	}
 	render() {		
 		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
@@ -146,29 +168,33 @@ class App extends Component {
 			})
 		}
 		// SORT PRODUCT //
-		if (valueSortProd !== 'values' || valueSortSlug === 'user' ) {
+		if (valueSortProd !== 'values' && valueSortSlug === 'stt' ) {
 				arrayProducts = arrayProducts.filter((Item) => {
 				return Item.stt === valueSortProd
 			})
-		}else if ( valueSortProd !== 'values' || valueSortSlug === 'stt' ) {
+		}else if ( valueSortProd !== 'values' && valueSortSlug === 'user' ) {
 			arrayProducts = _.orderBy(arrayProducts, ['title'], [valueSortProd]);
 		}			
-		console.log(valueSortSlug + '  ' + valueSortProd );
-		// console.log(this.state.arrayProducts[0].fName);
 		return (
-			<div className="App">
-			   <Header />
-			   <Aside 
-			   	infoUser={infoUser}
-			   	valueToggleMenu={toggleMenu}
-			   	handleToggle={this.handleToggle}
-			   	parHandleChange={this.parHandleChange} 
-			   	arrayItemsCategory={arrayItemsCategory} />
-			   <Content 
-			   	handleFilterProd = {this.handleFilterProd}
-			   	handleSortProd = {this.handleSortProd}
-			   	arrayProducts={arrayProducts}
-			   	handleStt={this.handleStt} />
+			<div className="container">
+				<div className="row">
+					<div className="App clearfix">
+					   <Header />
+					   <Aside 
+					   	infoUser={infoUser}
+					   	valueToggleMenu={toggleMenu}
+					   	handleToggle={this.handleToggle}
+					   	parHandleChange={this.parHandleChange} 
+					   	arrayItemsCategory={arrayItemsCategory} />
+					   <Content 
+					   	handleFilterProd = {this.handleFilterProd}
+					   	handleSortProd = {this.handleSortProd}
+					   	arrayProducts={arrayProducts}
+					   	handleStt={this.handleStt} 
+					   	handleDelete = {this.handleDelete}
+					   	handleAdd = { this.handleAdd } />
+					</div>
+				</div>
 			</div>
 		);
 	}

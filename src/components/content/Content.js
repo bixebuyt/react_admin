@@ -5,15 +5,18 @@ import ContentSort from './content_Sort';
 import ContentItem from './content_Item';
 import ContentPagination from './content_Pagination';
 
+import AddItem from '../add/add_Item';
+
 class Content extends Component {
   render() {
-    var { arrayProducts, handleStt, handleFilterProd, handleSortProd } = this.props;
+    var { arrayProducts, handleStt, handleFilterProd, handleSortProd, handleDelete, handleAdd } = this.props;
     var showArrayProducts = arrayProducts.map((product, index) => 
          <ContentItem 
-            handleStt={handleStt} 
-            key={index} 
-            index={index} 
-            product={ product } />
+            handleStt = { handleStt } 
+            key = { index } 
+            index = { index } 
+            product = { product }
+            handleDelete = { handleDelete } />
     )
     return (
       <div id="content" className="col-lg-10 col-md-10">	
@@ -47,6 +50,9 @@ class Content extends Component {
             <ContentPagination />
           </div>         
         </section>
+
+        <AddItem handleAdd = { handleAdd } />
+
       </div>
     );
   }
