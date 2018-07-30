@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-const uuidv1 = require('uuid/v1');
 
 class AddItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: '',
+      img: '',
       title: '',
       comment: '',
       content: '',
@@ -34,7 +34,7 @@ class AddItem extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="image">Image:</label>
-            <input type="file" name="image" name="image" />
+            <input type="file" name="img" value={this.state.img} onChange={this.handleChangeValue} />
           </div>
           <div className="form-group">
             <label htmlFor="">Specifications:</label>

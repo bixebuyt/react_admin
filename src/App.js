@@ -85,7 +85,8 @@ class App extends Component {
 		}
 	}	
 	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
-	componentWillMount() { 			
+	componentWillMount() { 	
+	 	
 	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
 	   this.setState({
 	     arrayProducts: arrayProducts
@@ -158,6 +159,7 @@ class App extends Component {
 		this.setState({
 			arrayProducts: arrayProducts
 		})
+		console.log(data.img);
 	}
 	render() {		
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));

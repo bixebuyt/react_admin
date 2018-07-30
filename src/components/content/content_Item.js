@@ -13,7 +13,7 @@ class ContentItem extends Component {
         <tr key={index}>
           <td><input type="checkbox" className="checkthis" /></td>
           <td>{index + 1}</td>
-          <td><img src={window.location.origin+ '/'+product.img} alt={product.title} /></td>
+          <td><img src={product.img !== '' ? window.location.origin+ '/'+product.img : window.location.origin+ '/uploads/products/'+'img-default.jpg' } alt={product.title} /></td>
           <td>{product.title}</td>
           <td>{product.comment}</td>
           <td>{product.content}</td>
