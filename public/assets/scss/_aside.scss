@@ -1,6 +1,5 @@
 aside {
 	float: left;
-	background: $color-background;
 	color: $color-text;
 	height: calc(100% - 70px);
 	i {
@@ -82,26 +81,20 @@ aside {
 					position: absolute;
 					z-index: 2;
 					right: 0px;
-					top: 50%;
+					top: 10%;
 					color: $color-text;
-					-webkit-transform: translateY(-50%);
-						   -moz-transform: translateY(-50%);
-						    -ms-transform: translateY(-50%);
-						     -o-transform: translateY(-50%);
-						        transform: translateY(-50%);	
-
 				}
 				&.active {
 					margin-bottom: 15px;
 					&:after {
 						content: "\f0dd";
+						top: 10%;
 					}
 				}
 			}
 			.category {
 				padding: 10px 0px;
 				padding-left: 10px;
-				// display: none;
 				-webkit-transition: all 0.5s ease;
 				   -moz-transition: all 0.5s ease;
 				    -ms-transition: all 0.5s ease;

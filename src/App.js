@@ -85,7 +85,7 @@ class App extends Component {
 		}
 	}	
 	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
-	componentWillMount() { 		
+	componentWillMount() { 			
 	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
 	   this.setState({
 	     arrayProducts: arrayProducts
@@ -133,7 +133,7 @@ class App extends Component {
 		this.setState({
 			arrayProducts: products
 		})	
-		localStorage.setItem('arrayProducts', JSON.stringify(products))
+		localStorage.setItem('arrayProducts', '123123');
 	}
 	// HANDLE DELETE ITEM PRODUCT //
 	handleDelete = (itemId) => {
@@ -147,6 +147,12 @@ class App extends Component {
 		localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
 	}
 	handleAdd = (data) => {
+		if (data.stt === 'true') {
+			data.stt = true;
+		}else if (data.stt === 'false') {
+			data.stt = false;
+		}
+		data.id = uuidv1();
 		var { arrayProducts } = this.state;
 		arrayProducts.push(data);
 		this.setState({
@@ -154,6 +160,7 @@ class App extends Component {
 		})
 	}
 	render() {		
+		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
 		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {

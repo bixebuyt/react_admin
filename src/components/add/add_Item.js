@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+const uuidv1 = require('uuid/v1');
 
 class AddItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       title: '',
       comment: '',
+      content: '',
+      stt: 'false'
     }
   }
   handleChangeValue = (event) => {
@@ -37,18 +41,18 @@ class AddItem extends Component {
             <input type="text" className="form-control" placeholder="Specifications" value={this.state.comment} name="comment" onChange={this.handleChangeValue} />
           </div>
           <div className="form-group">
-            <label htmlFor="">Detailed configuration:</label>
-            <input type="text" className="form-control" placeholder="detai" name="" />
+            <label htmlFor="">Detail configuration:</label>
+            <input type="text" className="form-control" placeholder="detai" value={this.state.content} name="content" onChange={this.handleChangeValue} />
           </div>    
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" defaultValue="option1" defaultChecked onChange={this.handleChangeValue} />
-            <label className="form-check-label" htmlFor="exampleRadios1">
+            <input className="form-check-input" id="stttrue" type="radio" name="stt" value="true" checked={ this.state.stt === 'true'} onChange={this.handleChangeValue} />
+            <label className="form-check-label" htmlFor="stttrue" >
               Active
             </label>
           </div>
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" defaultValue="option2" />
-            <label className="form-check-label" htmlFor="exampleRadios2">
+            <input className="form-check-input" id="sttfalse" type="radio" name="stt" value="false" checked={ this.state.stt === 'false' } onChange={this.handleChangeValue} />
+            <label className="form-check-label" htmlFor="sttfalse" >
               Unactive
             </label>
           </div>            
