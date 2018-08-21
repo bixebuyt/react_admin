@@ -9,22 +9,23 @@ import AddItem from '../add/add_Item';
 
 class Content extends Component {
   render() {
-    var { arrayProducts, handleStt, handleFilterProd, handleSortProd, handleDelete, handleAdd } = this.props;
-    var showArrayProducts = arrayProducts.map((product, index) => 
-         <ContentItem 
-            handleStt = { handleStt } 
-            key = { index } 
-            index = { index } 
+    var { arrayProducts, handleStt, handleFilterProd, handleSortProd, handleDelete, handleAdd, handleEdit } = this.props;
+    var showArrayProducts = arrayProducts.map((product, index) =>
+         <ContentItem
+            handleStt = { handleStt }
+            key = { index }
+            index = { index }
             product = { product }
+            handleEdit = {handleEdit}
             handleDelete = { handleDelete } />
     )
     return (
-      <div id="content" className="col-lg-10 col-md-10">	
-         <ContentBreadcrumb />	
+      <div id="content" className="col-lg-10 col-md-10">
+         <ContentBreadcrumb />
          <section className="table-content">
           <div className="col-md-12">
             <div className="filter-item">
-              <ContentFilter handleFilterProd = {handleFilterProd} /> 
+              <ContentFilter handleFilterProd = {handleFilterProd} />
               <ContentSort handleSortProd = {handleSortProd} />
             </div>
             <div className="table-responsive">
@@ -41,14 +42,14 @@ class Content extends Component {
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
-               </thead>    
-               <tbody>         
+               </thead>
+               <tbody>
                 { showArrayProducts }
                </tbody>
               </table>
             </div>
             <ContentPagination />
-          </div>         
+          </div>
         </section>
 
         <AddItem handleAdd = { handleAdd } />

@@ -38,7 +38,7 @@ class App extends Component {
 				{
 					name: 'Other',
 					icon: 'fa fa-braille'
-				}							
+				}
 			],
 			arrayProducts: [
 				{
@@ -80,24 +80,23 @@ class App extends Component {
 					comment: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form',
 					content: 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable.',
 					stt: false
-				}													
+				}
 			]
 		}
-	}	
+	}
 	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
-	componentWillMount() { 	
-	 	
+	componentWillMount() {
 	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
 	   this.setState({
 	     arrayProducts: arrayProducts
-	   })   
-	}	
+	   })
+	}
 	// FILTER CATEGORY MENU //
-	parHandleChange = (val) => { 
+	parHandleChange = (val) => {
 		this.setState({
 			valueFilter: val
 		})
-	} 
+	}
 	// FILTER PRODUCT //
 	handleFilterProd = (val) => {
 		this.setState({
@@ -133,14 +132,14 @@ class App extends Component {
 		}
 		this.setState({
 			arrayProducts: products
-		})	
+		})
 		localStorage.setItem('arrayProducts', '123123');
 	}
 	// HANDLE DELETE ITEM PRODUCT //
 	handleDelete = (itemId) => {
 		var { arrayProducts } = this.state;
 		var arrayProducts = _.filter(arrayProducts, function(item) {
-			return item.id !== itemId ; 
+			return item.id !== itemId ;
 		});
 		this.setState({
 			arrayProducts: arrayProducts
@@ -161,7 +160,10 @@ class App extends Component {
 		})
 		console.log(data.img);
 	}
-	render() {		
+	handleEdit = (data) => {
+		console.log(data);
+	}
+	render() {
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
 		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
 		// FILTER CATEGORY MENU //
@@ -183,24 +185,25 @@ class App extends Component {
 			})
 		}else if ( valueSortProd !== 'values' && valueSortSlug === 'user' ) {
 			arrayProducts = _.orderBy(arrayProducts, ['title'], [valueSortProd]);
-		}			
+		}
 		return (
 			<div className="container">
 				<div className="row">
 					<div className="App clearfix">
 					   <Header />
-					   <Aside 
+					   <Aside
 					   	infoUser={infoUser}
 					   	valueToggleMenu={toggleMenu}
 					   	handleToggle={this.handleToggle}
-					   	parHandleChange={this.parHandleChange} 
+					   	parHandleChange={this.parHandleChange}
 					   	arrayItemsCategory={arrayItemsCategory} />
-					   <Content 
+					   <Content
 					   	handleFilterProd = {this.handleFilterProd}
 					   	handleSortProd = {this.handleSortProd}
 					   	arrayProducts={arrayProducts}
-					   	handleStt={this.handleStt} 
+					   	handleStt={this.handleStt}
 					   	handleDelete = {this.handleDelete}
+					   	handleEdit = {this.handleEdit}
 					   	handleAdd = { this.handleAdd } />
 					</div>
 				</div>
