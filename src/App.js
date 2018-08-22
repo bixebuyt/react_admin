@@ -168,19 +168,19 @@ class App extends Component {
 		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {
-				arrayItemsCategory = arrayItemsCategory.filter((Item) => {
+			arrayItemsCategory = arrayItemsCategory.filter((Item) => {
 				return Item.name.toLowerCase().indexOf(valueFilter.toLowerCase()) !== -1;
 			})
 		}
 		// FILTER PRODUCT //
 		if (valueFilterProd) {
-				arrayProducts = arrayProducts.filter((Item) => {
+			arrayProducts = arrayProducts.filter((Item) => {
 				return Item.title.toLowerCase().indexOf(valueFilterProd.toLowerCase()) !== -1;
 			})
 		}
 		// SORT PRODUCT //
 		if (valueSortProd !== 'values' && valueSortSlug === 'stt' ) {
-				arrayProducts = arrayProducts.filter((Item) => {
+			arrayProducts = arrayProducts.filter((Item) => {
 				return Item.stt === valueSortProd
 			})
 		}else if ( valueSortProd !== 'values' && valueSortSlug === 'user' ) {
