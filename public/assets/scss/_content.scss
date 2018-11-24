@@ -18,9 +18,22 @@
 			position: relative;
 			height: 30px;
 			.dropdown {
-				float: right;
 				margin-right: 20px;
 				margin-top: -5px;
+				.btn-warning {
+					float: left;
+					i {
+						margin-right: 0.2em;
+						display: inline-block !important;
+					}
+				}
+				.box_soft {
+					float: right;
+					position: relative;
+					.btn-primary {
+						margin-right: 1em;
+					}
+				}
 			}
 			input {
 				width: 260px;
@@ -77,6 +90,12 @@
 		.pagination {
 			display: flex;
 		}		
+	}
+	.txt_titleForm {
+		color: red;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin: 1em 0px;
 	}
 	form {
 		.form-check {

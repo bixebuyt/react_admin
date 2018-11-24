@@ -24,9 +24,26 @@ class AddItem extends Component {
     data.preventDefault();
     this.props.handleAdd(this.state);
   }
+  handleHadClick = () => {
+    console.log(this.props.handleHadClick());
+  }
+  componentWillReceiveProps() {
+    var { arrayProductsEditing } = this.props;
+    if ( arrayProductsEditing ) {
+      this.setState({
+        id: arrayProductsEditing.id,
+        img: '',
+        title: arrayProductsEditing.title,
+        comment: arrayProductsEditing.comment,
+        content: arrayProductsEditing.content,
+        stt: arrayProductsEditing.stt,
+      })
+    }  
+  }
   render() {  
     return (      
       <div className="col-lg-6 col-md-6">
+        <h3 className="txt_titleForm">Add Product</h3>
         <form onSubmit = {this.submitForm}>
           <div className="form-group">
             <label htmlFor="">Title:</label>
@@ -56,7 +73,7 @@ class AddItem extends Component {
               Unactive
             </label>
           </div>            
-          <button type="submit" className="btn btn-default">Submit</button>
+          <button onClick={this.handleHadClick} type="submit" className="btn btn-default">Submit</button>
         </form>
       </div>
     );

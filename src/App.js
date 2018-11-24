@@ -14,6 +14,7 @@ class App extends Component {
 			valueSortProd: 'values',
 			valueSortSlug: '',
 			toggleMenu: true,
+			arrayProductsEditing: '',
 			/* INFO USER ADMIN */
 			infoUser: [
 				{
@@ -146,6 +147,7 @@ class App extends Component {
 		})
 		localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
 	}
+	// HANDLE ADD NEW ITEM PRODUCT //
 	handleAdd = (data) => {
 		if (data.stt === 'true') {
 			data.stt = true;
@@ -158,14 +160,24 @@ class App extends Component {
 		this.setState({
 			arrayProducts: arrayProducts
 		})
-		console.log(data.img);
 	}
-	handleEdit = (data) => {
-		console.log(data);
+	// HANDLE EDIT ITEM PRODUCT //
+	handleEdit = (id) => {
+		var { arrayProducts, arrayProductsEditing } = this.state;
+		var arrayProducts = _.filter(arrayProducts, function(item) {
+			return item.id === id ;
+		});
+		var arrayProductsEditing = arrayProducts;
+		this.setState({
+			arrayProductsEditing: arrayProductsEditing
+		})
+		// localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
 	}
 	render() {
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
-		var { arrayItemsCategory, valueFilter, toggleMenu, arrayProducts, infoUser, valueFilterProd, valueSortProd, valueSortSlug } = this.state;
+		var { arrayItemsCategory, valueFilter, toggleMenu, 
+			arrayProducts, infoUser, valueFilterProd, 
+			valueSortProd, valueSortSlug, arrayProductsEditing } = this.state;
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {
 				arrayItemsCategory = arrayItemsCategory.filter((Item) => {
@@ -203,7 +215,8 @@ class App extends Component {
 					   	arrayProducts={arrayProducts}
 					   	handleStt={this.handleStt}
 					   	handleDelete = {this.handleDelete}
-					   	handleEdit = {this.handleEdit}
+						handleEdit = {this.handleEdit}
+						arrayProductsEditing = {arrayProductsEditing}
 					   	handleAdd = { this.handleAdd } />
 					</div>
 				</div>

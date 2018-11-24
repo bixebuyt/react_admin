@@ -12,6 +12,13 @@ body {
 	font-family: 'Roboto Condensed', sans-serif !important;
 	color: #212529;
 	font-size: 16px;
+	.clearfix:before, .clearfix:after {
+		display: table;
+		content: " ";
+	}
+	.clearfix:after {
+		clear: both;
+	}
 	#root {
 		background: $color-background;
 		.container {

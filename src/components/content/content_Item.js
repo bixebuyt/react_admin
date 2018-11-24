@@ -5,7 +5,8 @@ class ContentItem extends Component {
     super(props);
     this.state = {
       sttCheckbox: true,
-      idItem: ''
+      idItem: '',
+      listDelete: []
     }
   }
   handleStt = (e) => {
@@ -15,7 +16,7 @@ class ContentItem extends Component {
     this.props.handleDelete(e)
   }
   handleEdit = (e) => {
-    this.props.handleEdit(e)
+    this.props.handleEdit(e);
   }
   handleCheckbox = (e) => {
     this.setState ({
@@ -23,10 +24,12 @@ class ContentItem extends Component {
     })
     if ( this.state.sttCheckbox ) {
       this.state.idItem = e;
+      this.setState({
+        listDelete: this.state.listDelete.push(this.state.idItem)
+      })
     }else {
-      this.state.idItem = '';
+      this.state.idItem = 0;
     }
-    console.log(this.state.idItem)
   }
   render() {
     var { product, index } = this.props;
