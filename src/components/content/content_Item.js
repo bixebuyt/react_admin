@@ -5,12 +5,9 @@ class ContentItem extends Component {
     super(props);
     this.state = {
       sttCheckbox: true,
-      idItem: '',
-<<<<<<< HEAD
-      listDelete: []
-=======
+      idItem: [],
+      listDelete: ['1'],
       listEdit: []
->>>>>>> 420799a0f5ccb160f01cae44ae09ef1c1d9661e0
     }
   }
   handleStt = (e) => {
@@ -23,27 +20,26 @@ class ContentItem extends Component {
     this.props.handleEdit(e);
   }
   handleCheckbox = (e) => {
+    console.log(e);
     this.setState ({
-      sttCheckbox: !this.state.sttCheckbox
-    })
-<<<<<<< HEAD
-    if ( this.state.sttCheckbox ) {
-      this.state.idItem = e;
-      this.setState({
-        listDelete: this.state.listDelete.push(this.state.idItem)
-      })
-    }else {
-      this.state.idItem = 0;
-    }
-=======
+      sttCheckbox: !this.state.sttCheckbox,
+      idItem: e
+    })   
+    
+
     this.setState({
-      listEdit: this.state.listEdit.push(e)
+      listDelete: [...this.state.idItem,this.state.listDelete]
     })
-    console.log(this.state.listEdit)
->>>>>>> 420799a0f5ccb160f01cae44ae09ef1c1d9661e0
+    console.log(this.state.listDelete);
+    
+    // this.setState({
+    //   listEdit: [...e,this.state.listEdit]
+    // })
+    
   }
   render() {
     var { product, index } = this.props;
+    
     return (
       <tr key={index}>
         <td><input type="checkbox" onChange={() => this.handleCheckbox(product.id)} className="checkthis" /></td>
