@@ -11,7 +11,8 @@ class Content extends Component {
       super(props);
       this.state = {
         isShowAddItem: false,
-        handleHadClick: true
+        handleHadClick: true,
+        listDelete: []
       }
     }
     handleSttForm = () => {
@@ -24,10 +25,22 @@ class Content extends Component {
           handleHadClick: !this.state.handleHadClick
         })
     }
+    handleListDelete = (e) => {
+      this.setState({
+        listDelete: [...this.state.listDelete,e]
+      })
+    }
+    handleDeleteChecked = (e) => {
+      let {arrayProducts} = this.props;
+      let t = arrayProducts.filter((item,index) => !this.state.listDelete.includes(item.id));
+      this.setState({
+        arrayProducts: t
+      })
+    }
   render() {
-    console.log(this.state.handleHadClick);
+    console.log(this.props.arrayProducts);
     let {isShowAddItem, handleHadClick} = this.state;
-    let { arrayProducts, handleStt, handleFilterProd, handleSortProd, 
+    let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
     let showArrayProducts = arrayProducts.map((product, index) =>
          <ContentItem
@@ -36,19 +49,20 @@ class Content extends Component {
             index = { index }
             product = { product }
             handleEdit = {handleEdit}
+            listDelete = {this.handleListDelete}
             handleDelete = { handleDelete } />
     )
     let elmAddItem  = '';
     let elmTableProducts = '';
     if (isShowAddItem) {
-        elmAddItem = <AddItem            
+        elmAddItem = <AddItem
             arrayProductsEditing = {arrayProductsEditing}
-            handleAdd = { handleAdd } 
+            handleAdd = { handleAdd }
             handleHadClick = {this.handleHadClick} />
-        elmTableProducts = '';     
+        elmTableProducts = '';
     }else if (handleHadClick){
         elmAddItem = '';
-        elmTableProducts =  
+        elmTableProducts =
             <div>
               <div className="table-responsive">
                 <table id="mytable" className="table table-bordred table-striped">
@@ -70,6 +84,7 @@ class Content extends Component {
                  </tbody>
                 </table>
               </div>
+              <button onClick={this.handleDeleteChecked} type="button" className="btn btn-danger"><i className="fa fa-times" aria-hidden="true"></i> DELETE</button>
               <ContentPagination />
             </div>
     }
@@ -80,7 +95,7 @@ class Content extends Component {
           <div className="col-md-12">
             <div className="filter-item">
               <ContentFilter handleFilterProd = {handleFilterProd} />
-              <ContentSort 
+              <ContentSort
               handleSttForm = {this.handleSttForm}
               handleSortProd = {handleSortProd} />
             </div>

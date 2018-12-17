@@ -6,7 +6,7 @@ class ContentItem extends Component {
     this.state = {
       sttCheckbox: true,
       idItem: [],
-      listDelete: ['1'],
+      listDelete: [],
       listEdit: []
     }
   }
@@ -20,26 +20,10 @@ class ContentItem extends Component {
     this.props.handleEdit(e);
   }
   handleCheckbox = (e) => {
-    console.log(e);
-    this.setState ({
-      sttCheckbox: !this.state.sttCheckbox,
-      idItem: e
-    })   
-    
-
-    this.setState({
-      listDelete: [...this.state.idItem,this.state.listDelete]
-    })
-    console.log(this.state.listDelete);
-    
-    // this.setState({
-    //   listEdit: [...e,this.state.listEdit]
-    // })
-    
+    this.props.listDelete(e)
   }
   render() {
     var { product, index } = this.props;
-    
     return (
       <tr key={index}>
         <td><input type="checkbox" onChange={() => this.handleCheckbox(product.id)} className="checkthis" /></td>
