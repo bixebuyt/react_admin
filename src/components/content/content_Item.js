@@ -20,7 +20,7 @@ class ContentItem extends Component {
     this.props.handleEdit(e);
   }
   handleCheckbox = (e) => {
-    this.props.listDelete(e)
+    this.props.listDelete(e);
   }
   render() {
     var { product, index } = this.props;

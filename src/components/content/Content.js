@@ -32,13 +32,13 @@ class Content extends Component {
     }
     handleDeleteChecked = (e) => {
       let {arrayProducts} = this.props;
-      let t = arrayProducts.filter((item,index) => !this.state.listDelete.includes(item.id));
-      this.setState({
-        arrayProducts: t
+      let idCheck = arrayProducts.filter((item,index) => {
+           return !this.state.listDelete.includes(item.id);
       })
+      this.props.listIdCheck(idCheck)
     }
   render() {
-    console.log(this.props.arrayProducts);
+    console.log(this.state.listDelete);
     let {isShowAddItem, handleHadClick} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
