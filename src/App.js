@@ -182,8 +182,8 @@ class App extends Component {
 	}
 	render() {
 		localStorage.setItem('arrayProducts', JSON.stringify(this.state.arrayProducts));
-		var { arrayItemsCategory, valueFilter, toggleMenu, 
-			arrayProducts, infoUser, valueFilterProd, 
+		var { arrayItemsCategory, valueFilter, toggleMenu,
+			arrayProducts, infoUser, valueFilterProd,
 			valueSortProd, valueSortSlug, arrayProductsEditing } = this.state;
 		// FILTER CATEGORY MENU //
 		if (valueFilter) {

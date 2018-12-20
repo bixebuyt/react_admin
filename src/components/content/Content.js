@@ -5,6 +5,7 @@ import ContentSort from './content_Sort';
 import ContentItem from './content_Item';
 import ContentPagination from './content_Pagination';
 import AddItem from '../add/add_Item';
+import _ from 'lodash';
 
 class Content extends Component {
     constructor(props) {
@@ -26,9 +27,21 @@ class Content extends Component {
         })
     }
     handleListDelete = (e) => {
+      let { listDelete } = this.state;
+      let tempEl = '';
+      let checkExist = listDelete.indexOf(e) > -1;
+      if ( checkExist ) {
+         tempEl = '';
+      }
+      else {
+         tempEl = e;
+      }
+      console.log('this is listDelete '+ listDelete);
+       console.log('this is tempEl '+ tempEl);
       this.setState({
-        listDelete: [...this.state.listDelete,e]
+        listDelete: [...this.state.listDelete,tempEl]
       })
+       // console.log(tempEl);
     }
     handleDeleteChecked = (e) => {
       let {arrayProducts} = this.props;
@@ -38,7 +51,6 @@ class Content extends Component {
       this.props.listIdCheck(idCheck)
     }
   render() {
-    console.log(this.state.listDelete);
     let {isShowAddItem, handleHadClick} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
