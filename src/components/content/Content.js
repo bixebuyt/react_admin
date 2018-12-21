@@ -43,7 +43,10 @@ class Content extends Component {
       }
     }
     handleCheckAll = () => {
-      
+      let arrayProduct = this.props.arrayProducts.map(item => {
+          return item.id
+      })
+      console.log(arrayProduct);
     }
     handleDeleteChecked = (e) => {
       let {arrayProducts} = this.props;
@@ -52,7 +55,7 @@ class Content extends Component {
       })
       this.props.listIdCheck(idCheck)
     }
-  render() {
+    render() {
     let {isShowAddItem, handleHadClick, listDelete} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
@@ -124,7 +127,7 @@ class Content extends Component {
 
       </div>
     );
-  }
+    }
 }
 
 export default Content;
