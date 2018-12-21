@@ -4,7 +4,6 @@ class ContentItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sttCheckbox: true,
       idItem: [],
       listDelete: [],
       listEdit: []

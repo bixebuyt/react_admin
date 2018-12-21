@@ -28,20 +28,22 @@ class Content extends Component {
     }
     handleListDelete = (e) => {
       let { listDelete } = this.state;
-      let tempEl = '';
-      let checkExist = listDelete.indexOf(e) > -1;
-      if ( checkExist ) {
-         tempEl = '';
+      let idCheck = listDelete.includes(e);
+      if ( idCheck ) {
+        let idCheck = listDelete.filter((item) => {
+             return item != e;
+        })
+        this.setState({
+          listDelete: idCheck
+        })
+      }else {
+        this.setState({
+          listDelete: [...this.state.listDelete,e]
+        })
       }
-      else {
-         tempEl = e;
-      }
-      console.log('this is listDelete '+ listDelete);
-       console.log('this is tempEl '+ tempEl);
-      this.setState({
-        listDelete: [...this.state.listDelete,tempEl]
-      })
-       // console.log(tempEl);
+    }
+    handleCheckAll = () => {
+      
     }
     handleDeleteChecked = (e) => {
       let {arrayProducts} = this.props;
@@ -51,7 +53,7 @@ class Content extends Component {
       this.props.listIdCheck(idCheck)
     }
   render() {
-    let {isShowAddItem, handleHadClick} = this.state;
+    let {isShowAddItem, handleHadClick, listDelete} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
     let showArrayProducts = arrayProducts.map((product, index) =>
@@ -64,6 +66,10 @@ class Content extends Component {
             listDelete = {this.handleListDelete}
             handleDelete = { handleDelete } />
     )
+    let btnDeleteChecked = '';
+    if ( listDelete != '' ) {
+      btnDeleteChecked = <button onClick={this.handleDeleteChecked} type="button" className="btn btn-danger"><i className="fa fa-times" aria-hidden="true"></i> DELETE</button>
+    }
     let elmAddItem  = '';
     let elmTableProducts = '';
     if (isShowAddItem) {
@@ -80,7 +86,7 @@ class Content extends Component {
                 <table id="mytable" className="table table-bordred table-striped">
                  <thead>
                     <tr>
-                      <th><input type="checkbox" id="checkall" /></th>
+                      <th><input onClick={this.handleCheckAll} type="checkbox" id="checkall" /></th>
                       <th>No.</th>
                       <th>Image</th>
                       <th>Title</th>
@@ -96,7 +102,7 @@ class Content extends Component {
                  </tbody>
                 </table>
               </div>
-              <button onClick={this.handleDeleteChecked} type="button" className="btn btn-danger"><i className="fa fa-times" aria-hidden="true"></i> DELETE</button>
+              {btnDeleteChecked}
               <ContentPagination />
             </div>
     }
