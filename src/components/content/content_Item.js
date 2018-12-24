@@ -15,8 +15,8 @@ class ContentItem extends Component {
   handleDelete = (e) => {
     this.props.handleDelete(e)
   }
-  handleEdit = (e) => {
-    this.props.handleEdit(e);
+  handleEdit = (id) => {
+    this.props.handleEdit(id);
   }
   handleCheckbox = (e) => {
     this.props.listDelete(e);

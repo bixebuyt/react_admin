@@ -86,7 +86,7 @@ class App extends Component {
 		}
 	}
 	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
-	componentDidMount() {
+	componentWillMount() {
 	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
 	   this.setState({
 	     arrayProducts: arrayProducts
@@ -163,17 +163,18 @@ class App extends Component {
 		})
 	}
 	// HANDLE EDIT ITEM PRODUCT //
-	handleEdit = (id) => {
-		var { arrayProducts, arrayProductsEditing } = this.state;
-		var arrayProducts = _.filter(arrayProducts, function(item) {
-			return item.id === id ;
-		});
-		var arrayProductsEditing = arrayProducts;
-		this.setState({
-			arrayProductsEditing: arrayProductsEditing
-		})
-		// localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
-	}
+	// handleEdit = (id) => {
+	// 	console.log(id);
+	// 	var { arrayProducts, arrayProductsEditing } = this.state;
+	// 	var arrayProducts = _.filter(arrayProducts, function(item) {
+	// 		return item.id === id ;
+	// 	});
+	// 	var arrayProductsEditing = arrayProducts;
+	// 	this.setState({
+	// 		arrayProductsEditing: arrayProductsEditing
+	// 	})
+	// 	// localStorage.setItem('arrayProducts', JSON.stringify(arrayProducts))
+	// }
 	// HANDLE DELETE ITEMS PRODUCT //
 	handleIdCheck = (e) => {
 		this.setState({
@@ -223,7 +224,6 @@ class App extends Component {
 					   	arrayProducts={arrayProducts}
 					   	handleStt={this.handleStt}
 					   	handleDelete = {this.handleDelete}
-						handleEdit = {this.handleEdit}
 						arrayProductsEditing = {arrayProductsEditing}
 					   	handleAdd = { this.handleAdd } />
 					</div>

@@ -20,15 +20,16 @@ class AddItem extends Component {
       [name]: value
     });
   }
-  submitForm = (data) => {    
+  submitForm = (data) => {
     data.preventDefault();
     this.props.handleAdd(this.state);
   }
   handleHadClick = () => {
     console.log(this.props.handleHadClick());
   }
-  componentWillReceiveProps() {
+  componentWillMount() {
     var { arrayProductsEditing } = this.props;
+    console.log(arrayProductsEditing);
     if ( arrayProductsEditing ) {
       this.setState({
         id: arrayProductsEditing.id,
@@ -38,10 +39,10 @@ class AddItem extends Component {
         content: arrayProductsEditing.content,
         stt: arrayProductsEditing.stt,
       })
-    }  
+    }
   }
-  render() {  
-    return (      
+  render() {
+    return (
       <div className="col-lg-6 col-md-6">
         <h3 className="txt_titleForm">Add Product</h3>
         <form onSubmit = {this.submitForm}>
@@ -60,7 +61,7 @@ class AddItem extends Component {
           <div className="form-group">
             <label htmlFor="">Detail configuration:</label>
             <input type="text" className="form-control" placeholder="detai" value={this.state.content} name="content" onChange={this.handleChangeValue} />
-          </div>    
+          </div>
           <div className="form-check">
             <input className="form-check-input" id="stttrue" type="radio" name="stt" value="true" checked={ this.state.stt === 'true'} onChange={this.handleChangeValue} />
             <label className="form-check-label" htmlFor="stttrue" >
@@ -72,7 +73,7 @@ class AddItem extends Component {
             <label className="form-check-label" htmlFor="sttfalse" >
               Unactive
             </label>
-          </div>            
+          </div>
           <button onClick={this.handleHadClick} type="submit" className="btn btn-default">Submit</button>
         </form>
       </div>

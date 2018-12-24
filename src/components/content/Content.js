@@ -13,7 +13,8 @@ class Content extends Component {
       this.state = {
         isShowAddItem: false,
         handleHadClick: true,
-        listDelete: []
+        listDelete: [],
+        arrayProductsEditing: []
       }
     }
     handleSttForm = () => {
@@ -46,7 +47,6 @@ class Content extends Component {
       let arrayProduct = this.props.arrayProducts.map(item => {
           return item.id
       })
-      console.log(arrayProduct);
     }
     handleDeleteChecked = (e) => {
       let {arrayProducts} = this.props;
@@ -55,17 +55,25 @@ class Content extends Component {
       })
       this.props.listIdCheck(idCheck)
     }
+    handleEdit = (id) => {
+      let { arrayProducts } = this.props;
+      var index = _.findIndex(arrayProducts, function(item) { return item.id == id });
+      this.setState({
+        isShowAddItem: true,
+        arrayProductsEditing: arrayProducts[index]
+      })
+    }
     render() {
-    let {isShowAddItem, handleHadClick, listDelete} = this.state;
+    let {isShowAddItem, handleHadClick, listDelete, arrayProductsEditing} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
-      handleDelete, handleAdd, handleEdit, arrayProductsEditing, handleSttForm } = this.props;
+      handleDelete, handleAdd, handleEdit, handleSttForm } = this.props;
     let showArrayProducts = arrayProducts.map((product, index) =>
          <ContentItem
             handleStt = { handleStt }
             key = { index }
             index = { index }
             product = { product }
-            handleEdit = {handleEdit}
+            handleEdit = {this.handleEdit}
             listDelete = {this.handleListDelete}
             handleDelete = { handleDelete } />
     )
