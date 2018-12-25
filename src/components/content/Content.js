@@ -5,6 +5,7 @@ import ContentSort from './content_Sort';
 import ContentItem from './content_Item';
 import ContentPagination from './content_Pagination';
 import AddItem from '../add/add_Item';
+import { connect } from 'react-redux';
 import _ from 'lodash';
 
 class Content extends Component {
@@ -64,6 +65,7 @@ class Content extends Component {
       })
     }
     render() {
+      console.log(this.props.tasks);
     let {isShowAddItem, handleHadClick, listDelete, arrayProductsEditing} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, handleSttForm } = this.props;
@@ -138,4 +140,10 @@ class Content extends Component {
     }
 }
 
-export default Content;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks
+  }
+};
+
+export default connect(mapStateToProps, null)(Content);

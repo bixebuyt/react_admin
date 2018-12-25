@@ -221,7 +221,7 @@ class App extends Component {
 					    listIdCheck = {this.handleIdCheck}
 					   	handleFilterProd = {this.handleFilterProd}
 					   	handleSortProd = {this.handleSortProd}
-					   	arrayProducts={arrayProducts}
+					   	// arrayProducts={arrayProducts}
 					   	handleStt={this.handleStt}
 					   	handleDelete = {this.handleDelete}
 						arrayProductsEditing = {arrayProductsEditing}
