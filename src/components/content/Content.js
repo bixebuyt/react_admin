@@ -65,7 +65,6 @@ class Content extends Component {
       })
     }
     render() {
-      console.log(this.props.tasks);
     let {isShowAddItem, handleHadClick, listDelete, arrayProductsEditing} = this.state;
     let { arrayProducts, handleStt, handleFilterProd, handleSortProd,
       handleDelete, handleAdd, handleEdit, handleSttForm } = this.props;
@@ -142,7 +141,7 @@ class Content extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks
+    arrayProducts: state.tasks
   }
 };
 

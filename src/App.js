@@ -87,10 +87,12 @@ class App extends Component {
 	}
 	// SAVE ARRAY PRODUTS TO LOCALSTORAGE //
 	componentWillMount() {
-	   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
-	   this.setState({
-	     arrayProducts: arrayProducts
-	   })
+		if ( localStorage && localStorage.getItem('arrayProducts') ) {
+		   var arrayProducts = JSON.parse(localStorage.getItem('arrayProducts'));
+		   this.setState({
+		     arrayProducts: arrayProducts
+		   })
+		}
 	}
 	// FILTER CATEGORY MENU //
 	parHandleChange = (val) => {

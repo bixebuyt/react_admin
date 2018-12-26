@@ -1,6 +1,8 @@
 import * as types from './../constants/ActionTypes';
+const uuidv1 = require('uuid/v1');
 
-var initialState = [];
+var data = JSON.parse(localStorage.getItem('arrayProducts'));
+var initialState = data ? data : [];
 
 var myReducer = (state = initialState, action) => {
 	switch (action.type) {
